@@ -9,7 +9,7 @@
 <link rel="icon" href="assets/img/logo.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&family=Ubuntu:wght@400;500;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/style.css">
 <link rel="stylesheet" href="css/home.css">
 <script>document.documentElement.classList.add('js')</script>
@@ -41,6 +41,7 @@
           <a href="services.html" class="dropdown-foot">View all services <span>6 practices &rarr;</span></a>
         </div>
       </li>
+      <li><a href="#products">Products</a></li>
       <li><a href="case-studies.html">Case Studies</a></li>
       <li><a href="careers.html">Careers</a></li>
       <li><a href="contact.html">Contact</a></li>
@@ -75,6 +76,7 @@
         <a href="services.html#staffing">Staffing &amp; Support</a>
       </div>
     </li>
+    <li><a href="#products">Products</a></li>
     <li><a href="case-studies.html">Case Studies</a></li>
     <li><a href="careers.html">Careers</a></li>
     <li><a href="contact.html">Contact</a></li>
@@ -212,63 +214,23 @@
     </div>
   </div>
 
-  <a href="#partners" class="hero-scroll" aria-label="Scroll to content"><span class="mono">Scroll</span><i></i></a>
-</section>
+  <!-- Hero Side Navigation Arrows -->
+  <button type="button" class="hero-nav-btn hero-prev" id="heroPrev" aria-label="Previous slide">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M15 18l-6-6 6-6"/>
+    </svg>
+  </button>
+  <button type="button" class="hero-nav-btn hero-next" id="heroNext" aria-label="Next slide">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M9 18l6-6-6-6"/>
+    </svg>
+  </button>
 
-<!-- ============ PARTNERS ============ -->
-<section class="partners" id="partners" aria-labelledby="partnersTitle">
-  <div class="container partners-head">
-    <p class="eyebrow" id="partnersTitle">Trusted Technology Partners</p>
-    <p class="partners-note">We work across the clouds, platforms and security stacks our clients already run on.</p>
-  </div>
-  <div class="marquee-dual">
-    <div class="marquee-row marquee-row-left">
-      <div class="marquee-track">
-        <div class="partner-card"><img src="assets/img/partners/Google.png" alt="Google Cloud" loading="lazy"></div>
-        <div class="partner-card"><img src="assets/img/partners/aws.jpg" alt="AWS" loading="lazy"></div>
-        <div class="partner-card"><img src="assets/img/partners/Microsoft.png" alt="Microsoft" loading="lazy"></div>
-        <div class="partner-card"><img src="assets/img/partners/Nvidia.png" alt="Nvidia" loading="lazy"></div>
-        <div class="partner-card"><img src="assets/img/partners/Paloalto.png" alt="Palo Alto Networks" loading="lazy"></div>
-        <div class="partner-card"><img src="assets/img/partners/Check-Point.png" alt="Check Point" loading="lazy"></div>
-        <div class="partner-card"><img src="assets/img/partners/SentinelOne.png" alt="SentinelOne" loading="lazy"></div>
-        <div class="partner-card"><img src="assets/img/partners/SonicWall.png" alt="SonicWall" loading="lazy"></div>
-        <!-- duplicate set for a seamless loop -->
-        <div class="partner-card" aria-hidden="true"><img src="assets/img/partners/Google.png" alt="" loading="lazy"></div>
-        <div class="partner-card" aria-hidden="true"><img src="assets/img/partners/aws.jpg" alt="" loading="lazy"></div>
-        <div class="partner-card" aria-hidden="true"><img src="assets/img/partners/Microsoft.png" alt="" loading="lazy"></div>
-        <div class="partner-card" aria-hidden="true"><img src="assets/img/partners/Nvidia.png" alt="" loading="lazy"></div>
-        <div class="partner-card" aria-hidden="true"><img src="assets/img/partners/Paloalto.png" alt="" loading="lazy"></div>
-        <div class="partner-card" aria-hidden="true"><img src="assets/img/partners/Check-Point.png" alt="" loading="lazy"></div>
-        <div class="partner-card" aria-hidden="true"><img src="assets/img/partners/SentinelOne.png" alt="" loading="lazy"></div>
-        <div class="partner-card" aria-hidden="true"><img src="assets/img/partners/SonicWall.png" alt="" loading="lazy"></div>
-      </div>
-    </div>
-    <div class="marquee-row marquee-row-right">
-      <div class="marquee-track">
-        <div class="partner-card"><img src="assets/img/partners/Kaspersky.png" alt="Kaspersky" loading="lazy"></div>
-        <div class="partner-card"><img src="assets/img/partners/Zscaler.png" alt="Zscaler" loading="lazy"></div>
-        <div class="partner-card"><img src="assets/img/partners/Veeam.png" alt="Veeam" loading="lazy"></div>
-        <div class="partner-card"><img src="assets/img/partners/Sophos.png" alt="Sophos" loading="lazy"></div>
-        <div class="partner-card"><img src="assets/img/partners/Lenovo.png" alt="Lenovo" loading="lazy"></div>
-        <div class="partner-card"><img src="assets/img/partners/Commvault.png" alt="Commvault" loading="lazy"></div>
-        <div class="partner-card"><img src="assets/img/partners/Rapid7.png" alt="Rapid7" loading="lazy"></div>
-        <div class="partner-card"><img src="assets/img/partners/Trend-Micro.png" alt="Trend Micro" loading="lazy"></div>
-        <!-- duplicate set for a seamless loop -->
-        <div class="partner-card" aria-hidden="true"><img src="assets/img/partners/Kaspersky.png" alt="" loading="lazy"></div>
-        <div class="partner-card" aria-hidden="true"><img src="assets/img/partners/Zscaler.png" alt="" loading="lazy"></div>
-        <div class="partner-card" aria-hidden="true"><img src="assets/img/partners/Veeam.png" alt="" loading="lazy"></div>
-        <div class="partner-card" aria-hidden="true"><img src="assets/img/partners/Sophos.png" alt="" loading="lazy"></div>
-        <div class="partner-card" aria-hidden="true"><img src="assets/img/partners/Lenovo.png" alt="" loading="lazy"></div>
-        <div class="partner-card" aria-hidden="true"><img src="assets/img/partners/Commvault.png" alt="" loading="lazy"></div>
-        <div class="partner-card" aria-hidden="true"><img src="assets/img/partners/Rapid7.png" alt="" loading="lazy"></div>
-        <div class="partner-card" aria-hidden="true"><img src="assets/img/partners/Trend-Micro.png" alt="" loading="lazy"></div>
-      </div>
-    </div>
-  </div>
+  <a href="#capabilities" class="hero-scroll" aria-label="Scroll to content"><span class="mono">Scroll</span><i></i></a>
 </section>
 
 <!-- ============ CAPABILITIES STRIP ============ -->
-<section class="caps" aria-label="Capabilities">
+<section class="caps" id="capabilities" aria-label="Capabilities">
   <div class="caps-track">
     <ul class="caps-list">
       <li>Cloud Strategy</li><li>AI &amp; Automation</li><li>Cybersecurity</li><li>DevOps &amp; CI/CD</li><li>Data Engineering</li><li>Managed Services</li><li>ERP Solutions</li>
@@ -290,6 +252,136 @@
     </p>
   </div>
 </section>
+
+<!-- ============ 02 · SOFTWARE PRODUCTS — auto-sliding interactive cards ============ -->
+<section class="products-section" id="products" aria-labelledby="productsTitle">
+  <div class="container">
+    <div class="products-head reveal">
+      <h2 id="productsTitle" class="products-title">Software Products</h2>
+      <p class="products-sub">Revolutionizing Your Workflow: Innovative Software Products Designed for Seamless Integration and Maximum Efficiency.</p>
+    </div>
+  </div>
+
+  <div class="products-carousel-wrap">
+    <button type="button" class="prod-btn prod-prev" id="prodPrev" aria-label="Previous products">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+    </button>
+
+    <div class="products-viewport" id="prodViewport">
+      <div class="products-track" id="prodTrack">
+
+        <!-- Card 1: Medisys -->
+        <article class="product-card" data-prod="medisys">
+          <div class="product-logo" aria-hidden="true">
+            <a href="medisys.html"><img src="assets/img/products/medisys.svg" alt="Medisys Logo" width="70" height="60" loading="lazy"></a>
+          </div>
+          <h4 class="product-name main-title"><a href="medisys.html" style="color:inherit; text-decoration:none;">Medisys</a></h4>
+          <h4 class="product-cat sx-tilte">Hospital Management Software</h4>
+          <div class="product-divider"></div>
+          <p class="product-desc">A robust software solution for multi-specialty hospitals and clinics. It's an end-to-end platform to manage OPD, IPD, EMR, pharmacy, and NABH compliant medical billing.</p>
+          <a href="medisys.html" class="product-readmore" data-prod-link="medisys"><span>Read More</span> <span class="readmore-arrow">&rarr;</span></a>
+        </article>
+
+        <!-- Card 2: Core5 Academy -->
+        <article class="product-card" data-prod="academy">
+          <div class="product-logo" aria-hidden="true">
+            <a href="core5-academy.html"><img src="assets/img/products/core5-academy.svg" alt="Core5 Academy Logo" width="70" height="60" loading="lazy"></a>
+          </div>
+          <h4 class="product-name main-title"><a href="core5-academy.html" style="color:inherit; text-decoration:none;">Core5 Academy</a></h4>
+          <h4 class="product-cat sx-tilte">Learning Management System</h4>
+          <div class="product-divider"></div>
+          <p class="product-desc">An enterprise-grade LMS built for educational institutes and corporate training. It's a comprehensive platform to deliver interactive courses, live classes, exams, and certifications.</p>
+          <a href="core5-academy.html" class="product-readmore" data-prod-link="academy"><span>Read More</span> <span class="readmore-arrow">&rarr;</span></a>
+        </article>
+
+        <!-- Card 3: MyCloudNexus -->
+        <article class="product-card" data-prod="cloudnexus">
+          <div class="product-logo" aria-hidden="true">
+            <a href="mycloudnexus.html"><img src="assets/img/products/mycloudnexus.svg" alt="MyCloudNexus Logo" width="70" height="60" loading="lazy"></a>
+          </div>
+          <h4 class="product-name main-title"><a href="mycloudnexus.html" style="color:inherit; text-decoration:none;">MyCloudNexus</a></h4>
+          <h4 class="product-cat sx-tilte">Cloud FinOps &amp; Billing Suite</h4>
+          <div class="product-divider"></div>
+          <p class="product-desc">Complete cost visibility and automated FinOps optimization across AWS, GCP, and Azure. Cuts cloud bills by 20%–40% and halts surprise overages with proactive alerts.</p>
+          <a href="mycloudnexus.html" class="product-readmore" data-prod-link="cloudnexus"><span>Read More</span> <span class="readmore-arrow">&rarr;</span></a>
+        </article>
+
+        <!-- Card 4: ElevateH -->
+        <article class="product-card" data-prod="elevateh">
+          <div class="product-logo" aria-hidden="true">
+            <a href="elevateh.html"><img src="assets/img/products/elevateh.svg" alt="ElevateH Logo" width="70" height="60" loading="lazy"></a>
+          </div>
+          <h4 class="product-name main-title"><a href="elevateh.html" style="color:inherit; text-decoration:none;">ElevateH</a></h4>
+          <h4 class="product-cat sx-tilte">Placement &amp; Resume Parsing Suite</h4>
+          <div class="product-divider"></div>
+          <p class="product-desc">An AI-powered campus recruitment and student career guidance platform. It automates resume parsing, job matching, and seamless TPO-faculty collaboration.</p>
+          <a href="elevateh.html" class="product-readmore" data-prod-link="elevateh"><span>Read More</span> <span class="readmore-arrow">&rarr;</span></a>
+        </article>
+
+        <!-- Card 5: MyOrg -->
+        <article class="product-card" data-prod="myorg">
+          <div class="product-logo" aria-hidden="true">
+            <a href="myorg.html"><img src="assets/img/products/myorg.svg" alt="MyOrg Logo" width="70" height="60" loading="lazy"></a>
+          </div>
+          <h4 class="product-name main-title"><a href="myorg.html" style="color:inherit; text-decoration:none;">MyOrg</a></h4>
+          <h4 class="product-cat sx-tilte">Google Enterprise Activity Monitor</h4>
+          <div class="product-divider"></div>
+          <p class="product-desc">A centralized domain governance and security console. It monitors, audits, and manages all Google Workspace Enterprise and Education Plus activities with ease.</p>
+          <a href="myorg.html" class="product-readmore" data-prod-link="myorg"><span>Read More</span> <span class="readmore-arrow">&rarr;</span></a>
+        </article>
+
+        <!-- Card 6: Bharat AI -->
+        <article class="product-card" data-prod="bharatai">
+          <div class="product-logo" aria-hidden="true">
+            <a href="bharat-ai.html"><img src="assets/img/products/bharat-ai.svg" alt="Bharat AI Logo" width="70" height="60" loading="lazy"></a>
+          </div>
+          <h4 class="product-name main-title"><a href="bharat-ai.html" style="color:inherit; text-decoration:none;">Bharat AI</a></h4>
+          <h4 class="product-cat sx-tilte">Agentic AI &amp; Sovereign GPU Suite</h4>
+          <div class="product-divider"></div>
+          <p class="product-desc">India's sovereign Agentic AI ecosystem. Delivers autonomous multi-agent workflows, domain-adapted enterprise LLMs, and high-performance dedicated GPU cloud clusters.</p>
+          <a href="bharat-ai.html" class="product-readmore" data-prod-link="bharatai"><span>Read More</span> <span class="readmore-arrow">&rarr;</span></a>
+        </article>
+
+      </div>
+    </div>
+
+    <button type="button" class="prod-btn prod-next" id="prodNext" aria-label="Next products">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+    </button>
+  </div>
+</section>
+
+<!-- Product Details Modal Dialog -->
+<div class="prod-modal" id="prodModal" aria-hidden="true" role="dialog" aria-modal="true">
+  <div class="prod-modal-card">
+    <button type="button" class="prod-modal-close" id="prodModalClose" aria-label="Close dialog">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg>
+    </button>
+    <div class="prod-modal-header">
+      <div class="product-icon" id="pmIcon"></div>
+      <div>
+        <h3 class="prod-modal-title" id="pmTitle">Product</h3>
+        <span class="prod-modal-badge" id="pmCat">Category</span>
+      </div>
+    </div>
+    <div class="prod-modal-block">
+      <h4><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2M9 11a4 4 0 100-8 4 4 0 000 8z"/></svg>Kiske Liye Hai (Target Users)</h4>
+      <p id="pmTarget"></p>
+    </div>
+    <div class="prod-modal-block">
+      <h4><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0zM12 9v4M12 17h.01"/></svg>Problem Jo Solve Karta Hai</h4>
+      <p id="pmProblem"></p>
+    </div>
+    <div class="prod-modal-block">
+      <h4><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18"><path d="M9 11l3 3L22 4M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg>Key Features</h4>
+      <ul class="prod-modal-features" id="pmFeatures"></ul>
+    </div>
+    <div class="prod-modal-actions">
+      <a href="contact.html" class="btn btn-gold" id="pmCta">Schedule a Demo <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a>
+      <button type="button" class="btn btn-ghost" id="pmDismiss">Close</button>
+    </div>
+  </div>
+</div>
 
 <!-- ============ 02 · SERVICES — 3D perspective carousel ============ -->
 <section class="orbit-section on-dark" id="services" aria-labelledby="servicesTitle">
@@ -328,12 +420,8 @@
 
   <div class="container orbit-ui">
     <button type="button" class="orbit-btn" id="orbitPrev" aria-label="Previous service"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M11 5l-7 7 7 7"/></svg></button>
-    <div class="orbit-meter">
-      <span class="mono" id="orbitCount" aria-live="polite">01 / 16</span>
-      <i class="orbit-rail"><b id="orbitFill"></b></i>
-    </div>
-    <button type="button" class="orbit-btn" id="orbitNext" aria-label="Next service"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg></button>
     <a href="services.html" class="btn btn-gold orbit-all">View all services <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a>
+    <button type="button" class="orbit-btn" id="orbitNext" aria-label="Next service"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg></button>
   </div>
 </section>
 
@@ -501,22 +589,58 @@
   </div>
 </section>
 
-<!-- ============ CLIENTS ============ -->
-<section class="clients" aria-labelledby="clientsTitle">
-  <div class="container">
-    <p class="eyebrow" id="clientsTitle">Trusted by growing businesses</p>
-    <ul class="client-wall">
-      <li class="reveal"><img src="assets/img/clients/control-print.jpg" alt="Control Print" loading="lazy"></li>
-      <li class="reveal"><img src="assets/img/clients/benow.jpg" alt="BeNow" loading="lazy"></li>
-      <li class="reveal"><img src="assets/img/clients/logistos.jpg" alt="Logistos" loading="lazy"></li>
-      <li class="reveal"><img src="assets/img/clients/flinnt.jpg" alt="Flinnt" loading="lazy"></li>
-      <li class="reveal"><img src="assets/img/clients/infyni.jpg" alt="Infyni" loading="lazy"></li>
-      <li class="reveal"><img src="assets/img/clients/maxmatech.jpg" alt="Maxmatech" loading="lazy"></li>
-      <li class="reveal"><img src="assets/img/clients/aliter.jpg" alt="Aliter" loading="lazy"></li>
-      <li class="reveal"><img src="assets/img/clients/arihant-capital.jpg" alt="Arihant Capital" loading="lazy"></li>
-      <li class="reveal"><img src="assets/img/clients/newgen.jpg" alt="Newgen" loading="lazy"></li>
-      <li class="reveal"><img src="assets/img/clients/unitech-solutions.jpg" alt="Unitech Solutions" loading="lazy"></li>
-    </ul>
+<!-- ============ PARTNERS (Moving Marquee) ============ -->
+<section class="partners" id="partners" aria-labelledby="partnersTitle">
+  <div class="container partners-head">
+    <div class="partners-title-wrap">
+      <p class="eyebrow">— Enterprise Ecosystem</p>
+      <h2 class="partners-heading" id="partnersTitle">Trusted Technology Partners</h2>
+    </div>
+    <p class="partners-note">We work across the clouds, platforms and security stacks our clients already run on.</p>
+  </div>
+  <div class="marquee-dual">
+    <div class="marquee-row marquee-row-left">
+      <div class="marquee-track">
+        <div class="partner-card"><img src="assets/img/partners/Google.png" alt="Google Cloud" loading="lazy"></div>
+        <div class="partner-card"><img src="assets/img/partners/aws.jpg" alt="AWS" loading="lazy"></div>
+        <div class="partner-card"><img src="assets/img/partners/Microsoft.png" alt="Microsoft" loading="lazy"></div>
+        <div class="partner-card"><img src="assets/img/partners/Nvidia.png" alt="Nvidia" loading="lazy"></div>
+        <div class="partner-card"><img src="assets/img/partners/Paloalto.png" alt="Palo Alto Networks" loading="lazy"></div>
+        <div class="partner-card"><img src="assets/img/partners/Check-Point.png" alt="Check Point" loading="lazy"></div>
+        <div class="partner-card"><img src="assets/img/partners/SentinelOne.png" alt="SentinelOne" loading="lazy"></div>
+        <div class="partner-card"><img src="assets/img/partners/SonicWall.png" alt="SonicWall" loading="lazy"></div>
+        <!-- duplicate set for a seamless loop -->
+        <div class="partner-card" aria-hidden="true"><img src="assets/img/partners/Google.png" alt="" loading="lazy"></div>
+        <div class="partner-card" aria-hidden="true"><img src="assets/img/partners/aws.jpg" alt="" loading="lazy"></div>
+        <div class="partner-card" aria-hidden="true"><img src="assets/img/partners/Microsoft.png" alt="" loading="lazy"></div>
+        <div class="partner-card" aria-hidden="true"><img src="assets/img/partners/Nvidia.png" alt="" loading="lazy"></div>
+        <div class="partner-card" aria-hidden="true"><img src="assets/img/partners/Paloalto.png" alt="" loading="lazy"></div>
+        <div class="partner-card" aria-hidden="true"><img src="assets/img/partners/Check-Point.png" alt="" loading="lazy"></div>
+        <div class="partner-card" aria-hidden="true"><img src="assets/img/partners/SentinelOne.png" alt="" loading="lazy"></div>
+        <div class="partner-card" aria-hidden="true"><img src="assets/img/partners/SonicWall.png" alt="" loading="lazy"></div>
+      </div>
+    </div>
+    <div class="marquee-row marquee-row-right">
+      <div class="marquee-track">
+        <div class="partner-card"><img src="assets/img/partners/Kaspersky.png" alt="Kaspersky" loading="lazy"></div>
+        <div class="partner-card"><img src="assets/img/partners/Zscaler.png" alt="Zscaler" loading="lazy"></div>
+        <div class="partner-card"><img src="assets/img/partners/Veeam.png" alt="Veeam" loading="lazy"></div>
+        <div class="partner-card"><img src="assets/img/partners/Sophos.png" alt="Sophos" loading="lazy"></div>
+        <div class="partner-card"><img src="assets/img/partners/Lenovo.png" alt="Lenovo" loading="lazy"></div>
+        <div class="partner-card"><img src="assets/img/partners/Commvault.png" alt="Commvault" loading="lazy"></div>
+        <div class="partner-card"><img src="assets/img/partners/Rapid7.png" alt="Rapid7" loading="lazy"></div>
+        <div class="partner-card"><img src="assets/img/partners/Trend-Micro.png" alt="Trend Micro" loading="lazy"></div>
+        <!-- duplicate set for a seamless loop -->
+        <div class="partner-card" aria-hidden="true"><img src="assets/img/partners/Kaspersky.png" alt="" loading="lazy"></div>
+        <div class="partner-card" aria-hidden="true"><img src="assets/img/partners/Zscaler.png" alt="" loading="lazy"></div>
+        <div class="partner-card" aria-hidden="true"><img src="assets/img/partners/Veeam.png" alt="" loading="lazy"></div>
+        <div class="partner-card" aria-hidden="true"><img src="assets/img/partners/Sophos.png" alt="" loading="lazy"></div>
+        <div class="partner-card" aria-hidden="true"><img src="assets/img/partners/Lenovo.png" alt="" loading="lazy"></div>
+        <div class="partner-card" aria-hidden="true"><img src="assets/img/partners/Commvault.png" alt="" loading="lazy"></div>
+        <div class="partner-card" aria-hidden="true"><img src="assets/img/partners/Rapid7.png" alt="" loading="lazy"></div>
+        <div class="partner-card" aria-hidden="true"><img src="assets/img/partners/Trend-Micro.png" alt="" loading="lazy"></div>
+      </div>
+    </div>
   </div>
 </section>
 

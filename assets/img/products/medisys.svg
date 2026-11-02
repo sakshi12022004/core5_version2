@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 64" width="80" height="64" fill="none">
+  <defs>
+    <linearGradient id="med-cross" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0284C7" />
+      <stop offset="100%" stop-color="#0F4BB9" />
+    </linearGradient>
+    <linearGradient id="med-ecg" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#06B6D4" />
+      <stop offset="50%" stop-color="#0284C7" />
+      <stop offset="100%" stop-color="#00C9FF" />
+    </linearGradient>
+  </defs>
+  <!-- Modern Hospital Cross (Geometric Rounded Arms) -->
+  <rect x="33" y="6" width="14" height="52" rx="4" fill="url(#med-cross)"/>
+  <rect x="14" y="25" width="52" height="14" rx="4" fill="url(#med-cross)"/>
+  <!-- Central Digital Healthcare Core Plate -->
+  <circle cx="40" cy="32" r="16" fill="#ffffff" stroke="#0284C7" stroke-width="2.5"/>
+  <!-- Vibrant ECG Pulse Heartbeat Line -->
+  <path d="M12 32 L28 32 L33 22 L37 42 L42 20 L47 38 L51 32 L68 32" 
+        stroke="url(#med-ecg)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Micro Medical Dot Indicator -->
+  <circle cx="40" cy="13" r="2.5" fill="#38BDF8"/>
+  <circle cx="40" cy="51" r="2.5" fill="#38BDF8"/>
+  <circle cx="21" cy="32" r="2.5" fill="#38BDF8"/>
+  <circle cx="59" cy="32" r="2.5" fill="#38BDF8"/>
+</svg>

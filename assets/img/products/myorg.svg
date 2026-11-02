@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 64" width="80" height="64" fill="none">
+  <defs>
+    <linearGradient id="org-shield" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#2563EB" />
+      <stop offset="100%" stop-color="#0F4BB9" />
+    </linearGradient>
+  </defs>
+  <!-- Shield Contour with very light tint fill -->
+  <path d="M40 6 L64 15 C64 36 52 50 40 58 C28 50 16 36 16 15 Z" 
+        stroke="url(#org-shield)" stroke-width="3.5" stroke-linejoin="round" fill="#EFF6FF"/>
+  <!-- Inner Shield Echo Line -->
+  <path d="M40 13 L58 20 C58 36 48 46 40 52 C32 46 22 36 22 20 Z" 
+        stroke="#93C5FD" stroke-width="1.5" stroke-dasharray="3 3"/>
+  <!-- Central Audit Radar Target -->
+  <circle cx="40" cy="32" r="7" fill="#DBEAFE" stroke="#1D4ED8" stroke-width="2"/>
+  <circle cx="40" cy="32" r="2.5" fill="#1D4ED8"/>
+  <!-- 4 Google Workspace Enterprise Quad Dots -->
+  <circle cx="31" cy="23" r="3.8" fill="#4285F4"/> <!-- Google Blue -->
+  <circle cx="49" cy="23" r="3.8" fill="#EA4335"/> <!-- Google Red -->
+  <circle cx="31" cy="41" r="3.8" fill="#FBBC05"/> <!-- Google Yellow -->
+  <circle cx="49" cy="41" r="3.8" fill="#34A853"/> <!-- Google Green -->
+  <!-- Audit Link Beams -->
+  <line x1="33" y1="25" x2="37" y2="29" stroke="#93C5FD" stroke-width="1.5"/>
+  <line x1="47" y1="25" x2="43" y2="29" stroke="#93C5FD" stroke-width="1.5"/>
+  <line x1="33" y1="39" x2="37" y2="35" stroke="#93C5FD" stroke-width="1.5"/>
+  <line x1="47" y1="39" x2="43" y2="35" stroke="#93C5FD" stroke-width="1.5"/>
+</svg>

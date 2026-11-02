@@ -353,6 +353,23 @@
         if (e.key === 'ArrowLeft') { e.preventDefault(); show(current - 1, true); }
       });
     });
+
+    // Side navigation buttons for Hero slider
+    var prevBtn = document.getElementById('heroPrev');
+    var nextBtn = document.getElementById('heroNext');
+    if (prevBtn) {
+      prevBtn.addEventListener('click', function (e) {
+        e.preventDefault();
+        show(current - 1);
+      });
+    }
+    if (nextBtn) {
+      nextBtn.addEventListener('click', function (e) {
+        e.preventDefault();
+        show(current + 1);
+      });
+    }
+
     show(0);
 
     if (reduceMotion) { hero.classList.add('no-auto'); return; }
@@ -450,18 +467,71 @@
       if (fill) { fill.style.left = (idx / n * 100) + '%'; fill.style.width = (100 / n) + '%'; }
     }
     function go(target) { pos = Math.round(target); render(); }
-    document.getElementById('orbitPrev').addEventListener('click', function () { go(pos - 1); });
-    document.getElementById('orbitNext').addEventListener('click', function () { go(pos + 1); });
+    var prevBtn = document.getElementById('orbitPrev');
+    var nextBtn = document.getElementById('orbitNext');
+    if (prevBtn) prevBtn.addEventListener('click', function () { go(pos - 1); resetAuto(); });
+    if (nextBtn) nextBtn.addEventListener('click', function () { go(pos + 1); resetAuto(); });
     root.addEventListener('keydown', function (e) {
-      if (e.key === 'ArrowRight') { e.preventDefault(); go(pos + 1); focusActive(); }
-      if (e.key === 'ArrowLeft') { e.preventDefault(); go(pos - 1); focusActive(); }
+      if (e.key === 'ArrowRight') { e.preventDefault(); go(pos + 1); focusActive(); resetAuto(); }
+      if (e.key === 'ArrowLeft') { e.preventDefault(); go(pos - 1); focusActive(); resetAuto(); }
     });
     function focusActive() { var a = track.querySelector('.ocard.is-active'); if (a) a.focus({ preventScroll: true }); }
+
+    // Auto-advance
+    var autoTimer = null;
+    var isHovered = false;
+    var inView = true;
+    function nextSlide() {
+      if (dragging || isHovered) return;
+      go(pos + 1);
+    }
+    function startAuto() {
+      if (autoTimer || reduceMotion || !inView) return;
+      autoTimer = setInterval(nextSlide, 2800);
+    }
+    function stopAuto() {
+      if (autoTimer) {
+        clearInterval(autoTimer);
+        autoTimer = null;
+      }
+    }
+    function resetAuto() {
+      stopAuto();
+      startAuto();
+    }
+
+    root.addEventListener('pointerenter', function () { isHovered = true; stopAuto(); });
+    root.addEventListener('pointerleave', function () { isHovered = false; if (inView) startAuto(); });
+    var orbitUi = document.querySelector('.orbit-ui');
+    if (orbitUi) {
+      orbitUi.addEventListener('pointerenter', function () { isHovered = true; stopAuto(); });
+      orbitUi.addEventListener('pointerleave', function () { isHovered = false; if (inView) startAuto(); });
+    }
+    root.addEventListener('focusin', function () { isHovered = true; stopAuto(); });
+    root.addEventListener('focusout', function () { isHovered = false; if (inView) startAuto(); });
+    document.addEventListener('visibilitychange', function () {
+      if (document.hidden) stopAuto();
+      else if (inView && !isHovered) startAuto();
+    });
+
+    if ('IntersectionObserver' in window) {
+      var obs = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          inView = entry.isIntersecting;
+          if (inView && !isHovered) startAuto();
+          else stopAuto();
+        });
+      }, { threshold: 0.15 });
+      obs.observe(root);
+    } else {
+      startAuto();
+    }
 
     // Drag / swipe
     var startX = 0, startPos = 0, dragging = false, moved = 0, lastX = 0, lastT = 0, vel = 0;
     root.addEventListener('pointerdown', function (e) {
       if (e.button !== 0) return;
+      stopAuto();
       dragging = true; moved = 0; startX = lastX = e.clientX; startPos = pos; lastT = performance.now(); vel = 0;
       root.classList.add('is-drag');
     });
@@ -477,13 +547,14 @@
       if (!dragging) return;
       dragging = false; root.classList.remove('is-drag');
       go(pos - clamp(vel * 2.2, -2, 2));
+      if (inView && !isHovered) startAuto();
     });
     cards.forEach(function (c, i) {
       c.addEventListener('dragstart', function (e) { e.preventDefault(); });
       c.addEventListener('click', function (e) {
         if (moved > 6) { e.preventDefault(); return; }
         var d = wrapD(i - pos);
-        if (Math.abs(d) >= 0.5) { e.preventDefault(); go(pos + d); }
+        if (Math.abs(d) >= 0.5) { e.preventDefault(); go(pos + d); resetAuto(); }
       });
     });
 
@@ -962,4 +1033,376 @@
     loopWhileVisible(section, frame);
     if (footEl) loopWhileVisible(footEl, frame);
   })();
+
+  /* ============================================================
+     SOFTWARE PRODUCTS — auto-sliding interactive cards carousel
+     & rich details modal
+     ============================================================ */
+  (function softwareProducts() {
+    var PRODUCTS_DATA = {
+      medisys: {
+        title: "Medisys",
+        category: "Hospital Management Information System (HMIS / Healthcare ERP)",
+        iconImg: "assets/img/products/medisys.svg",
+        iconClass: "pi-medisys",
+        iconSvg: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v16M4 12h16"/><rect x="3" y="3" width="18" height="18" rx="4"/></svg>',
+        target: "Multi-specialty hospitals, nursing homes, diagnostic clinics aur healthcare networks.",
+        problem: "Hospitals me excessive paper-work, manual billing errors, OPD/IPD crowd chaos aur pharmacy inventory ka mess khatam karna.",
+        features: [
+          "OPD & IPD Management: Patient registration, token system, bed allocation aur automated discharge summary generation.",
+          "Digital EMR (Electronic Medical Records): Doctors ke liye digital prescriptions, diagnostic lab reports aur patient history 1-click me available.",
+          "Pharmacy & Inventory: Real-time stock alerts, medicine expiry tracking aur automated integrated billing.",
+          "Billing & Insurance (TPA): Cashless insurance claims processing, automated invoice generation aur GST compliance.",
+          "NABH & Govt Compliance: NABH accreditation standards aur statutory healthcare reporting ke mutabiq audit-ready data."
+        ]
+      },
+      academy: {
+        title: "Core5 Academy",
+        category: "Enterprise Learning Management System (LMS)",
+        iconImg: "assets/img/products/core5-academy.svg",
+        iconClass: "pi-academy",
+        iconSvg: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>',
+        target: "Universities, colleges, schools, coaching institutes aur corporate companies (employee upskilling & compliance training).",
+        problem: "Traditional classroom teaching ko modern digital learning me convert karna aur students/employees ki learning progress ko automated track karna.",
+        features: [
+          "Virtual Classrooms: Live interactive classes, HD video lectures aur collaborative whiteboard integration.",
+          "Curriculum & Content Builder: Video, PDF, audio, aur interactive learning modules organize karne ka drag-and-drop system.",
+          "Assessments & Auto-Grading: Online quizzes, subjective exams, anti-cheat AI proctoring aur instant automated report cards.",
+          "Student Analytics & Certification: Attendance tracking, course drop-off rate analytics aur automated verifiable certificate generation."
+        ]
+      },
+      cloudnexus: {
+        title: "MyCloudNexus",
+        category: "Cloud Monitoring & FinOps Billing Suite",
+        iconImg: "assets/img/products/mycloudnexus.svg",
+        iconClass: "pi-cloudnexus",
+        iconSvg: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 10h-1.26A8 8 0 109 20h9a5 5 0 000-10z"/><path d="M12 12v4M10 14h4"/></svg>',
+        target: "Startups, IT companies, aur enterprises jo AWS, Google Cloud (GCP) ya Microsoft Azure use karte hain.",
+        problem: "Month ke end me aane wale unexpected bade cloud bills aur unmonitored server crashes/outages ko rokna.",
+        features: [
+          "Real-time Cost Visibility: Pata lagata hai ki kaunsa server, VM ya database sabse zyada kharcha kar raha hai.",
+          "Automated FinOps Optimization: Idle/unused virtual machines aur over-provisioned disks ko detect karke cloud billing 20%–40% tak reduce karna.",
+          "Budget Anomaly Alerts: Cloud usage ya budget sudden spike hote hi Slack/Email/Teams par instant alert bhejna.",
+          "Unified Multi-Cloud Dashboard: AWS, GCP aur Azure teeno clouds ka telemetry & billing data ek hi screen par live monitor karna."
+        ]
+      },
+      elevateh: {
+        title: "ElevateH",
+        category: "AI Resume Parsing & Campus Placement Suite",
+        iconImg: "assets/img/products/elevateh.svg",
+        iconClass: "pi-elevateh",
+        iconSvg: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6M16 13H8M16 17H8M10 9H8"/></svg>',
+        target: "Engineering & Management colleges, Training & Placement Officers (TPOs), students, aur corporate HR recruiters.",
+        problem: "Students ko standard ATS-friendly resume banane me dikkat aana, college TPOs ko recruitment drives organize karne me confusion, aur HRs ko hazaron resumes manually filter karne me lagne wala time.",
+        features: [
+          "AI Resume Parsing & Scoring: Student ka resume scan karke skills, projects aur experience extract karta hai aur instant ATS compatibility score deta hai.",
+          "Career Guidance & Job Matching: Student ki skills ke base par best job roles recommend karna aur missing skill-gaps seekhne ki personalized guidance dena.",
+          "TPO & Faculty Collaboration: College TPO ko placement drives schedule karne, eligible candidates filter karne aur companies ke sath 1-click me share karne ka unified dashboard.",
+          "Recruiter Portal: Corporate companies ke liye fast screening, shortlisted candidate tracker aur automated interview scheduling."
+        ]
+      },
+      myorg: {
+        title: "MyOrg",
+        category: "Google Enterprise & Education Plus Governance Suite",
+        iconImg: "assets/img/products/myorg.svg",
+        iconClass: "pi-myorg",
+        iconSvg: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><circle cx="12" cy="11" r="3"/><path d="M12 14v3"/></svg>',
+        target: "Google Workspace Enterprise aur Google Workspace for Education Plus use karne wale large institutions, universities aur corporate enterprises.",
+        problem: "Google Workspace domain ke andar sensitive security leakages, unauthorized external file sharing, unused costly licenses aur user engagement track na kar pana.",
+        features: [
+          "User Activity & Engagement Audit: Google Classroom, Meet, Drive aur Docs par students/staff ka real-time engagement reporting.",
+          "Data Security & DLP Alerts: Domain ke bahar kisi confidential file ke unauthorized personal Gmail par share hote hi instant block ya security alert dena.",
+          "License Optimization: Inactive Education Plus aur Enterprise licenses ko track karna taaki renewal par lakhon bachein.",
+          "Centralized Admin Console: Multi-campus ya multi-department hierarchy ko native Google Admin se 10x simple aur intuitive interface me manage karna."
+        ]
+      },
+      bharatai: {
+        title: "Bharat AI",
+        category: "Agentic AI, Sovereign LLMs & GPU Compute Infrastructure",
+        iconImg: "assets/img/products/bharat-ai.svg",
+        iconClass: "pi-bharatai",
+        iconSvg: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.93 4.93l2.12 2.12M16.95 16.95l2.12 2.12M4.93 19.07l2.12-2.12M16.95 7.05l2.12-2.12"/></svg>',
+        target: "Indian enterprises, BFSI, AI researchers, tech startups aur government institutions seeking sovereign, secure Agentic AI.",
+        problem: "Foreign generic LLMs par dependency, sovereign data privacy compliance, complex multi-agent workflows ki kami, aur high-cost GPU compute scarcity.",
+        features: [
+          "Agentic AI Workflows: Autonomous multi-agent coordination jo complex multi-step enterprise workflows ko bina human intervention execute karta hai.",
+          "Sovereign Enterprise LLMs: Indian languages, domain knowledge aur local regulatory compliance ke liye fine-tuned foundation models.",
+          "Dedicated Scalable GPU Cloud: On-demand high-performance GPU clusters training, fine-tuning aur low-latency production inference ke liye.",
+          "Air-Gapped Privacy & Security: Enterprise-grade zero-data-leakage architecture jo private cloud ya on-premise me deploy ho sakta hai."
+        ]
+      }
+    };
+
+    var viewport = document.getElementById('prodViewport');
+    var track = document.getElementById('prodTrack');
+    var prevBtn = document.getElementById('prodPrev');
+    var nextBtn = document.getElementById('prodNext');
+    var dotsContainer = document.getElementById('prodDots');
+    if (!viewport || !track) return;
+
+    var origCards = Array.prototype.slice.call(track.children);
+    var numOrig = origCards.length;
+    if (!numOrig) return;
+
+    // Clone cards at end and beginning to enable seamless circular infinite loop
+    origCards.forEach(function(card) {
+      var clone = card.cloneNode(true);
+      clone.setAttribute('data-clone', 'true');
+      track.appendChild(clone);
+    });
+    origCards.slice().reverse().forEach(function(card) {
+      var clone = card.cloneNode(true);
+      clone.setAttribute('data-clone', 'true');
+      track.insertBefore(clone, track.firstChild);
+    });
+
+    var allCards = track.querySelectorAll('.product-card');
+    var currentIndex = numOrig; // start on the first original card (index 6)
+    var autoTimer = null;
+    var cardWidth = 310;
+    var gap = 24;
+    var isMoving = false;
+
+    function calcMetrics() {
+      if (!allCards[0]) return;
+      cardWidth = allCards[0].getBoundingClientRect().width;
+      var style = window.getComputedStyle(track);
+      gap = parseFloat(style.gap) || 24;
+      renderDots();
+      updateCarousel(false);
+    }
+
+    function renderDots() {
+      if (!dotsContainer) return;
+      dotsContainer.innerHTML = '';
+      for (var i = 0; i < numOrig; i++) {
+        (function(idx) {
+          var dot = document.createElement('button');
+          dot.type = 'button';
+          var activeIdx = ((currentIndex - numOrig) % numOrig + numOrig) % numOrig;
+          dot.className = 'prod-dot' + (idx === activeIdx ? ' is-active' : '');
+          dot.setAttribute('aria-label', 'Go to product ' + (idx + 1));
+          dot.addEventListener('click', function() {
+            stopAuto();
+            var currActive = ((currentIndex - numOrig) % numOrig + numOrig) % numOrig;
+            var diff = idx - currActive;
+            currentIndex += diff;
+            updateCarousel(true);
+            startAuto();
+          });
+          dotsContainer.appendChild(dot);
+        })(i);
+      }
+    }
+
+    function updateCarousel(animate) {
+      var offset = currentIndex * (cardWidth + gap);
+      if (animate) {
+        track.style.transition = 'transform 0.52s cubic-bezier(0.16, 1, 0.3, 1)';
+      } else {
+        track.style.transition = 'none';
+      }
+      track.style.transform = 'translateX(-' + offset + 'px)';
+
+      if (dotsContainer) {
+        var activeIdx = ((currentIndex - numOrig) % numOrig + numOrig) % numOrig;
+        var dots = dotsContainer.querySelectorAll('.prod-dot');
+        dots.forEach(function(d, idx) {
+          d.classList.toggle('is-active', idx === activeIdx);
+        });
+      }
+    }
+
+    function checkWrap() {
+      if (currentIndex >= numOrig * 2) {
+        currentIndex = currentIndex - numOrig;
+        updateCarousel(false);
+      } else if (currentIndex < numOrig) {
+        currentIndex = currentIndex + numOrig;
+        updateCarousel(false);
+      }
+    }
+
+    track.addEventListener('transitionend', function(e) {
+      if (e.target !== track) return;
+      checkWrap();
+      isMoving = false;
+    });
+
+    function nextSlide() {
+      if (isMoving) return;
+      isMoving = true;
+      currentIndex++;
+      updateCarousel(true);
+      setTimeout(function() { checkWrap(); isMoving = false; }, 560);
+    }
+
+    function prevSlide() {
+      if (isMoving) return;
+      isMoving = true;
+      currentIndex--;
+      updateCarousel(true);
+      setTimeout(function() { checkWrap(); isMoving = false; }, 560);
+    }
+
+    function startAuto() {
+      stopAuto();
+      autoTimer = setInterval(function() {
+        if (!document.hidden) {
+          isMoving = false;
+          nextSlide();
+        }
+      }, 2800);
+    }
+
+    function stopAuto() {
+      if (autoTimer) {
+        clearInterval(autoTimer);
+        autoTimer = null;
+      }
+    }
+
+    if (nextBtn) {
+      nextBtn.addEventListener('click', function(e) {
+        e.preventDefault();
+        stopAuto();
+        isMoving = false;
+        nextSlide();
+        startAuto();
+      });
+    }
+
+    if (prevBtn) {
+      prevBtn.addEventListener('click', function(e) {
+        e.preventDefault();
+        stopAuto();
+        isMoving = false;
+        prevSlide();
+        startAuto();
+      });
+    }
+
+    // Pause on hover & resume on leave
+    viewport.addEventListener('mouseenter', stopAuto);
+    viewport.addEventListener('mouseleave', startAuto);
+    viewport.addEventListener('touchstart', stopAuto, { passive: true });
+    viewport.addEventListener('touchend', function() {
+      setTimeout(startAuto, 1000);
+    });
+
+    document.addEventListener('visibilitychange', function() {
+      if (document.hidden) stopAuto();
+      else startAuto();
+    });
+
+    // Touch swipe handling
+    var touchStartX = 0;
+    viewport.addEventListener('touchstart', function(e) {
+      if (e.touches && e.touches[0]) touchStartX = e.touches[0].clientX;
+    }, { passive: true });
+
+    viewport.addEventListener('touchend', function(e) {
+      if (!e.changedTouches || !e.changedTouches[0]) return;
+      var diffX = e.changedTouches[0].clientX - touchStartX;
+      if (Math.abs(diffX) > 40) {
+        stopAuto();
+        if (diffX < 0) nextSlide();
+        else prevSlide();
+        startAuto();
+      }
+    });
+
+    window.addEventListener('resize', calcMetrics);
+    window.addEventListener('load', calcMetrics);
+    calcMetrics();
+    setTimeout(calcMetrics, 300);
+    startAuto();
+
+    // Modal Details Handling
+    var modal = document.getElementById('prodModal');
+    var modalClose = document.getElementById('prodModalClose');
+    var modalDismiss = document.getElementById('pmDismiss');
+    var pmIcon = document.getElementById('pmIcon');
+    var pmTitle = document.getElementById('pmTitle');
+    var pmCat = document.getElementById('pmCat');
+    var pmTarget = document.getElementById('pmTarget');
+    var pmProblem = document.getElementById('pmProblem');
+    var pmFeatures = document.getElementById('pmFeatures');
+    var pmCta = document.getElementById('pmCta');
+
+    function openProduct(key) {
+      var data = PRODUCTS_DATA[key];
+      if (!data || !modal) return;
+      stopAuto();
+
+      if (data.iconImg) {
+        pmIcon.className = 'product-logo';
+        pmIcon.innerHTML = '<img src="' + data.iconImg + '" alt="' + data.title + '" width="70" height="60">';
+      } else {
+        pmIcon.className = 'product-icon ' + (data.iconClass || '');
+        pmIcon.innerHTML = data.iconSvg || '';
+      }
+      pmTitle.textContent = data.title;
+      pmCat.textContent = data.category;
+      pmTarget.textContent = data.target;
+      pmProblem.textContent = data.problem;
+
+      pmFeatures.innerHTML = '';
+      data.features.forEach(function(feat) {
+        var li = document.createElement('li');
+        li.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg><span>' + feat + '</span>';
+        pmFeatures.appendChild(li);
+      });
+
+      if (pmCta) {
+        pmCta.href = 'contact.html?product=' + encodeURIComponent(data.title);
+      }
+
+      modal.classList.add('is-open');
+      modal.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+      if (modalClose) modalClose.focus();
+    }
+
+    function closeModal() {
+      if (!modal) return;
+      modal.classList.remove('is-open');
+      modal.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+      startAuto();
+    }
+
+    var PROD_PAGES = {
+      medisys: 'medisys.html',
+      academy: 'core5-academy.html',
+      cloudnexus: 'mycloudnexus.html',
+      elevateh: 'elevateh.html',
+      myorg: 'myorg.html',
+      bharatai: 'bharat-ai.html'
+    };
+
+    document.addEventListener('click', function(e) {
+      var btn = e.target.closest('[data-prod-link], [data-open-prod]');
+      if (btn) {
+        var key = btn.getAttribute('data-prod-link') || btn.getAttribute('data-open-prod');
+        if (key && PROD_PAGES[key]) {
+          window.location.href = PROD_PAGES[key];
+          return;
+        }
+      }
+      if (modal && modal.classList.contains('is-open')) {
+        if (e.target === modal || e.target.closest('#prodModalClose') || e.target.closest('#pmDismiss')) {
+          e.preventDefault();
+          closeModal();
+        }
+      }
+    });
+
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape' && modal && modal.classList.contains('is-open')) {
+        closeModal();
+      }
+    });
+  })();
+
 })();
