@@ -158,6 +158,35 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   }
 
+  
+  /* ---------- Phone number touch / click haptic vibration & ring effect ---------- */
+  var phoneLinks = document.querySelectorAll('a[href^="tel:"], .header-phone, .mobile-phone');
+  phoneLinks.forEach(function (btn) {
+    var vibrateTimeout = null;
+
+    function triggerVibration() {
+      // Add vibrating animation class
+      btn.classList.add('is-vibrating');
+
+      // Native hardware haptic vibration (Android / supporting mobile devices)
+      if (typeof window !== 'undefined' && 'vibrate' in navigator) {
+        try {
+          // Phone ring vibration pattern: buzz, pause, buzz, pause, buzz
+          navigator.vibrate([70, 50, 110, 50, 70]);
+        } catch (err) {}
+      }
+
+      if (vibrateTimeout) clearTimeout(vibrateTimeout);
+      vibrateTimeout = setTimeout(function () {
+        btn.classList.remove('is-vibrating');
+      }, 700);
+    }
+
+    btn.addEventListener('touchstart', triggerVibration, { passive: true });
+    btn.addEventListener('pointerdown', triggerVibration, { passive: true });
+    btn.addEventListener('click', triggerVibration);
+  });
+
   /* ---------- Current year ---------- */
   document.querySelectorAll('.year').forEach(function (el) { el.textContent = new Date().getFullYear(); });
 });

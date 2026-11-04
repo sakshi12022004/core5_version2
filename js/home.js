@@ -257,14 +257,31 @@
       window.addEventListener('resize', function () { render(1); });
       return;
     }
+
+    // Skip intro button to jump directly to hero
+    var skipBtn = section.querySelector('.emerge-skip');
+    if (skipBtn) {
+      skipBtn.addEventListener('click', function (e) {
+        e.preventDefault();
+        var heroEl = document.getElementById('hero');
+        if (heroEl) heroEl.scrollIntoView({ behavior: 'smooth' });
+      });
+    }
+
+    // Fully scroll-driven: each part emerges step-by-step as the user scrolls
     loopWhileVisible(section, function () {
       var target = pinProgress(section, stage);
-      pv += (target - pv) * 0.14; // smooth catch-up keeps fast scrolling fluid in both directions
+      pv += (target - pv) * 0.16; // buttery smooth catch-up
       if (Math.abs(target - pv) < 0.0005) pv = target;
+
       var moving = mouse.step();
       var key = pv.toFixed(4) + '|' + mouse.x.toFixed(3) + '|' + mouse.y.toFixed(3) + '|' + stage.clientWidth;
-      if (key !== lastKey || moving) { lastKey = key; render(pv); }
+      if (key !== lastKey || moving) {
+        lastKey = key;
+        render(pv);
+      }
     });
+
     render(0);
   })();
 
@@ -370,6 +387,45 @@
       });
     }
 
+    // Scroll feature in Section 1 (Hero): Smooth scroll cue & Mouse-wheel slide navigation
+    var heroScrollCue = hero.querySelector('.hero-scroll');
+    if (heroScrollCue) {
+      heroScrollCue.addEventListener('click', function (e) {
+        e.preventDefault();
+        var nextSec = document.getElementById('capabilities') || document.querySelector('.caps') || document.getElementById('products');
+        if (nextSec) {
+          nextSec.scrollIntoView({ behavior: 'smooth' });
+        }
+      });
+    }
+
+    var lastHeroWheel = 0;
+    hero.addEventListener('wheel', function (e) {
+      var rect = hero.getBoundingClientRect();
+      if (rect.top > 60 || rect.bottom < window.innerHeight * 0.4) return;
+      if (Math.abs(e.deltaY) < 18) return;
+
+      var now = Date.now();
+      if (now - lastHeroWheel < 420) return;
+
+      if (e.deltaY > 0) {
+        // Scrolling down on hero
+        if (current < msgs.length - 1) {
+          e.preventDefault();
+          show(current + 1);
+          lastHeroWheel = now;
+        }
+        // If already on the last slide, allow natural page scroll down
+      } else if (e.deltaY < 0) {
+        // Scrolling up on hero
+        if (current > 0 && rect.top >= -40) {
+          e.preventDefault();
+          show(current - 1);
+          lastHeroWheel = now;
+        }
+      }
+    }, { passive: false });
+
     show(0);
 
     if (reduceMotion) { hero.classList.add('no-auto'); return; }
@@ -445,18 +501,18 @@
       var w = cardW();
       cards.forEach(function (c, i) {
         var d = wrapD(i - pos), ad = Math.abs(d), sg = d < 0 ? -1 : 1;
-        var x = sg * (ad <= 1 ? ad * 0.8 : 0.8 + (ad - 1) * 0.5) * w;
-        var z = -ad * 230;
-        var rot = -clamp(d, -1.7, 1.7) * 32;
+        var x = sg * (ad <= 1 ? ad * 0.72 : 0.72 + (ad - 1) * 0.42) * w;
+        var z = -ad * 180;
+        var rot = -clamp(d, -1.7, 1.7) * 25;
         var sc = 1 - Math.min(ad, 3) * 0.05;
         c.style.transform = 'translate3d(' + x.toFixed(1) + 'px,0,' + z.toFixed(1) + 'px) rotateY(' + rot.toFixed(2) + 'deg) scale(' + sc.toFixed(3) + ')';
         var op = clamp(1 - (ad - 2.2) * 0.9, 0, 1);
         c.style.opacity = op.toFixed(3);
         c.style.visibility = op <= 0.01 ? 'hidden' : 'visible';
         c.style.zIndex = String(100 - Math.round(ad * 10));
-        c.style.setProperty('--shift', (d * -34).toFixed(1) + 'px');
-        c.style.setProperty('--tint', (0.12 + Math.min(ad, 2) * 0.2).toFixed(2));
-        c.style.setProperty('--bri', (0.92 - Math.min(ad, 2) * 0.2).toFixed(2));
+        c.style.setProperty('--shift', '0px');
+        c.style.setProperty('--tint', '0');
+        c.style.setProperty('--bri', (1.0 - Math.min(ad, 2) * 0.15).toFixed(2));
         var active = ad < 0.5;
         c.classList.toggle('is-active', active);
         c.tabIndex = active ? 0 : -1;
@@ -471,6 +527,24 @@
     var nextBtn = document.getElementById('orbitNext');
     if (prevBtn) prevBtn.addEventListener('click', function () { go(pos - 1); resetAuto(); });
     if (nextBtn) nextBtn.addEventListener('click', function () { go(pos + 1); resetAuto(); });
+
+    // Scroll feature in 01 — Services: mouse wheel rotates cards
+    var lastOrbitWheel = 0;
+    root.addEventListener('wheel', function (e) {
+      var delta = Math.abs(e.deltaX) > Math.abs(e.deltaY) ? e.deltaX : e.deltaY;
+      if (Math.abs(delta) < 16) return;
+      var now = Date.now();
+      if (now - lastOrbitWheel < 240) return;
+      if (delta > 0) {
+        go(pos + 1);
+        resetAuto();
+        lastOrbitWheel = now;
+      } else if (delta < 0) {
+        go(pos - 1);
+        resetAuto();
+        lastOrbitWheel = now;
+      }
+    }, { passive: true });
     root.addEventListener('keydown', function (e) {
       if (e.key === 'ArrowRight') { e.preventDefault(); go(pos + 1); focusActive(); resetAuto(); }
       if (e.key === 'ArrowLeft') { e.preventDefault(); go(pos - 1); focusActive(); resetAuto(); }
@@ -1086,11 +1160,11 @@
           "Unified Multi-Cloud Dashboard: AWS, GCP aur Azure teeno clouds ka telemetry & billing data ek hi screen par live monitor karna."
         ]
       },
-      elevateh: {
-        title: "ElevateH",
+      elevate: {
+        title: "Elevate",
         category: "AI Resume Parsing & Campus Placement Suite",
-        iconImg: "assets/img/products/elevateh.svg",
-        iconClass: "pi-elevateh",
+        iconImg: "assets/img/products/elevate.svg",
+        iconClass: "pi-elevate",
         iconSvg: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6M16 13H8M16 17H8M10 9H8"/></svg>',
         target: "Engineering & Management colleges, Training & Placement Officers (TPOs), students, aur corporate HR recruiters.",
         problem: "Students ko standard ATS-friendly resume banane me dikkat aana, college TPOs ko recruitment drives organize karne me confusion, aur HRs ko hazaron resumes manually filter karne me lagne wala time.",
@@ -1117,20 +1191,20 @@
         ]
       },
       bharatai: {
-        title: "Bharat AI",
-        category: "Agentic AI, Sovereign LLMs & GPU Compute Infrastructure",
+        title: "Bharat.ai",
+        category: "GPU Compute Sales & Rental, Agentic AI & Custom Solutions",
         iconImg: "assets/img/products/bharat-ai.svg",
         iconClass: "pi-bharatai",
-        iconSvg: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.93 4.93l2.12 2.12M16.95 16.95l2.12 2.12M4.93 19.07l2.12-2.12M16.95 7.05l2.12-2.12"/></svg>',
-        target: "Indian enterprises, BFSI, AI researchers, tech startups aur government institutions seeking sovereign, secure Agentic AI.",
-        problem: "Foreign generic LLMs par dependency, sovereign data privacy compliance, complex multi-agent workflows ki kami, aur high-cost GPU compute scarcity.",
+        iconSvg: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="2"/><rect x="9" y="9" width="6" height="6"/><path d="M9 1v3M15 1v3M9 20v3M15 20v3M20 9h3M20 14h3M1 9h3M1 14h3"/></svg>',
+        target: "Enterprises, AI startups, researchers, BFSI aur tech companies jinko dedicated GPU compute, autonomous agents aur custom AI solutions chahiye.",
+        problem: "Extreme GPU compute scarcity, high cloud rental costs, complex multi-model integrations, aur ready-made autonomous agent workflows ki kami.",
         features: [
-          "Agentic AI Workflows: Autonomous multi-agent coordination jo complex multi-step enterprise workflows ko bina human intervention execute karta hai.",
-          "Sovereign Enterprise LLMs: Indian languages, domain knowledge aur local regulatory compliance ke liye fine-tuned foundation models.",
-          "Dedicated Scalable GPU Cloud: On-demand high-performance GPU clusters training, fine-tuning aur low-latency production inference ke liye.",
-          "Air-Gapped Privacy & Security: Enterprise-grade zero-data-leakage architecture jo private cloud ya on-premise me deploy ho sakta hai."
+          "GPU Sales & On-Demand Rental: High-performance NVIDIA H100, A100 aur L40S clusters outright buy karein ya flexible hourly/monthly lease & rent par lein.",
+          "Ready-Made AI Agents: Production-ready pre-built agents customer ops, IT helpdesk, financial auditing, sales pipeline aur code review ke liye.",
+          "Agentic Workflow Automation: Autonomous multi-agent coordination jo complex multi-step workflows ko plan, execute aur self-correct karta hai.",
+          "Multi-Model Orchestration & Custom AI: Dynamic intelligent model routing (GPT-4o, Claude, Llama 3, DeepSeek) + custom model fine-tuning aur enterprise RAG pipelines."
         ]
-      }
+      },
     };
 
     var viewport = document.getElementById('prodViewport');
@@ -1376,9 +1450,9 @@
       medisys: 'medisys.html',
       academy: 'core5-academy.html',
       cloudnexus: 'mycloudnexus.html',
-      elevateh: 'elevateh.html',
+      elevate: 'elevate.html',
       myorg: 'myorg.html',
-      bharatai: 'bharat-ai.html'
+      bharatai: 'bharat-ai.html',
     };
 
     document.addEventListener('click', function(e) {
