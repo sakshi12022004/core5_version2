@@ -286,8 +286,7 @@
   })();
 
   /* ============================================================
-     01 · HERO — original photographs with a wipe transition, HUD
-     overlay and layered cursor parallax; messages as tabs
+     01 · HERO — sleek, static, buttery-smooth crossfade slider
      ============================================================ */
   (function hero() {
     var hero = document.getElementById('hero');
@@ -295,43 +294,9 @@
     var msgs = hero.querySelectorAll('.hero-msg');
     var tabs = hero.querySelectorAll('.hero-tab');
     var shots = hero.querySelectorAll('.hero-shot');
-    var reticle = document.getElementById('hudReticle');
-    var tag = document.getElementById('hudTag');
     if (!msgs.length || msgs.length !== tabs.length) return;
 
-    // Reticle ticks
-    var ticks = reticle && reticle.querySelector('.ticks');
-    if (ticks) {
-      var s = '';
-      for (var k = 0; k < 48; k++) {
-        var a = k / 48 * Math.PI * 2, r2 = k % 6 ? 74 : 80;
-        s += '<line x1="' + (68 * Math.cos(a)).toFixed(1) + '" y1="' + (68 * Math.sin(a)).toFixed(1) + '" x2="' + (r2 * Math.cos(a)).toFixed(1) + '" y2="' + (r2 * Math.sin(a)).toFixed(1) + '"/>';
-      }
-      ticks.innerHTML = s;
-    }
-
-    // Words rise one by one
-    hero.querySelectorAll('[data-split]').forEach(function (title) {
-      var n = 0;
-      (function wrap(node) {
-        Array.prototype.slice.call(node.childNodes).forEach(function (child) {
-          if (child.nodeType === 3) {
-            var frag = document.createDocumentFragment();
-            child.textContent.split(/(\s+)/).forEach(function (part) {
-              if (!part) return;
-              if (/^\s+$/.test(part)) { frag.appendChild(document.createTextNode(' ')); return; }
-              var w = document.createElement('span'); w.className = 'w';
-              var inner = document.createElement('span'); inner.textContent = part;
-              w.style.setProperty('--i', n++);
-              w.appendChild(inner); frag.appendChild(w);
-            });
-            node.replaceChild(frag, child);
-          } else if (child.nodeType === 1) wrap(child);
-        });
-      })(title);
-    });
-
-    var current = 0, cleanup = null;
+    var current = 0;
     function show(i, focus) {
       var prev = current;
       current = (i + msgs.length) % msgs.length;
@@ -339,7 +304,10 @@
         var on = k === current;
         m.classList.toggle('is-active', on);
         m.setAttribute('aria-hidden', String(!on));
-        m.querySelectorAll('a').forEach(function (a) { if (on) a.removeAttribute('tabindex'); else a.setAttribute('tabindex', '-1'); });
+        m.querySelectorAll('a').forEach(function (a) {
+          if (on) a.removeAttribute('tabindex');
+          else a.setAttribute('tabindex', '-1');
+        });
       });
       tabs.forEach(function (t, k) {
         var on = k === current;
@@ -349,20 +317,12 @@
         if (on && focus) t.focus();
       });
       if (shots.length && prev !== current) {
-        clearTimeout(cleanup);
-        shots.forEach(function (sh) { sh.classList.remove('was-active'); });
         shots[prev].classList.remove('is-active');
-        shots[prev].classList.add('was-active');
+        shots[prev].classList.remove('was-active');
         shots[current].classList.add('is-active');
-        cleanup = setTimeout(function () { shots[prev].classList.remove('was-active'); }, 1600);
       }
-      if (reticle && shots[current]) {
-        var cs = shots[current].style;
-        reticle.style.setProperty('--fx', cs.getPropertyValue('--fx'));
-        reticle.style.setProperty('--fy', cs.getPropertyValue('--fy'));
-      }
-      if (tag) tag.textContent = 'FOCUS 0' + (current + 1) + ' — ' + tabs[current].textContent.replace(/^\d+/, '').trim().toUpperCase();
     }
+
     tabs.forEach(function (t, k) {
       t.addEventListener('click', function () { show(k); });
       t.addEventListener('keydown', function (e) {
@@ -387,6 +347,27 @@
       });
     }
 
+    // Swipe support on touch devices
+    var heroTouchStartX = 0, heroTouchStartY = 0;
+    hero.addEventListener('touchstart', function (e) {
+      if (e.touches && e.touches[0]) {
+        heroTouchStartX = e.touches[0].clientX;
+        heroTouchStartY = e.touches[0].clientY;
+      }
+    }, { passive: true });
+    hero.addEventListener('touchend', function (e) {
+      if (!e.changedTouches || !e.changedTouches[0]) return;
+      var dx = e.changedTouches[0].clientX - heroTouchStartX;
+      var dy = e.changedTouches[0].clientY - heroTouchStartY;
+      if (Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy)) {
+        if (dx < 0) {
+          show(current + 1);
+        } else {
+          show(current - 1);
+        }
+      }
+    }, { passive: true });
+
     // Scroll feature in Section 1 (Hero): Smooth scroll cue & Mouse-wheel slide navigation
     var heroScrollCue = hero.querySelector('.hero-scroll');
     if (heroScrollCue) {
@@ -409,15 +390,12 @@
       if (now - lastHeroWheel < 420) return;
 
       if (e.deltaY > 0) {
-        // Scrolling down on hero
         if (current < msgs.length - 1) {
           e.preventDefault();
           show(current + 1);
           lastHeroWheel = now;
         }
-        // If already on the last slide, allow natural page scroll down
       } else if (e.deltaY < 0) {
-        // Scrolling up on hero
         if (current > 0 && rect.top >= -40) {
           e.preventDefault();
           show(current - 1);
@@ -429,24 +407,16 @@
     show(0);
 
     if (reduceMotion) { hero.classList.add('no-auto'); return; }
-    hero.querySelector('.hero-tabs').addEventListener('animationend', function (e) {
-      if (e.animationName === 'tabFill') show(current + 1);
-    });
+    var tabsWrap = hero.querySelector('.hero-tabs');
+    if (tabsWrap) {
+      tabsWrap.addEventListener('animationend', function (e) {
+        if (e.animationName === 'tabFill') show(current + 1);
+      });
+    }
     hero.addEventListener('pointerenter', function () { hero.classList.add('is-paused'); });
     hero.addEventListener('pointerleave', function () { hero.classList.remove('is-paused'); });
     hero.addEventListener('focusin', function () { hero.classList.add('is-paused'); });
     hero.addEventListener('focusout', function () { hero.classList.remove('is-paused'); });
-
-    // Layered parallax: photo < HUD; copy barely moves so it stays readable
-    var media = document.getElementById('heroMedia'), hud = document.getElementById('heroHud'), copy = document.getElementById('heroCopy');
-    var m = follower(0.08);
-    loopWhileVisible(hero, function () {
-      m.step();
-      var sy = clamp(-hero.getBoundingClientRect().top, 0, 1200);
-      media.style.transform = 'translate3d(' + (m.x * -34).toFixed(1) + 'px,' + (m.y * -24 + sy * 0.22).toFixed(1) + 'px,0) scale(1.06)';
-      if (hud) hud.style.transform = 'translate3d(' + (m.x * 50).toFixed(1) + 'px,' + (m.y * 31).toFixed(1) + 'px,0)';
-      if (copy) copy.style.transform = 'translate3d(' + (m.x * 10).toFixed(1) + 'px,' + (m.y * 6.5 - sy * 0.08).toFixed(1) + 'px,0)';
-    });
   })();
 
   /* ============================================================
@@ -1109,7 +1079,7 @@
   })();
 
   /* ============================================================
-     SOFTWARE PRODUCTS — auto-sliding interactive cards carousel
+     SAAS PRODUCTS — auto-sliding interactive cards carousel
      & rich details modal
      ============================================================ */
   (function softwareProducts() {

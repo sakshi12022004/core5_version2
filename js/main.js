@@ -6,16 +6,11 @@ document.addEventListener('DOMContentLoaded', function () {
   /* ---------- Header state, back-to-top, scroll progress (one rAF-throttled listener) ---------- */
   var header = document.querySelector('.site-header');
   var backTop = document.querySelector('.back-top');
-  var bar = document.querySelector('.scroll-progress');
   var ticking = false;
   function onScroll() {
     var y = window.scrollY;
     if (header) header.classList.toggle('is-scrolled', y > 24);
     if (backTop) backTop.classList.toggle('show', y > 600);
-    if (bar) {
-      var max = document.documentElement.scrollHeight - window.innerHeight;
-      bar.style.transform = 'scaleX(' + (max > 0 ? y / max : 0) + ')';
-    }
     ticking = false;
   }
   window.addEventListener('scroll', function () {

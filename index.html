@@ -33,7 +33,7 @@
           <div class="mega-menu-grid">
             <!-- Products Column -->
             <div class="mega-col">
-              <div class="mega-heading">Products</div>
+              <div class="mega-heading">SaaS Products</div>
               <div class="mega-list">
                 <a href="medisys.html" class="mega-item">
                   <span class="mega-title">Medisys</span>
@@ -107,7 +107,7 @@
           </div>
         </div>
       </li>
-      <li><a href="#products">Products</a></li>
+      <li><a href="#products">SaaS Products</a></li>
       <li><a href="case-studies.html">Case Studies</a></li>
       <li><a href="careers.html">Careers</a></li>
       <li><a href="contact.html">Contact</a></li>
@@ -142,7 +142,7 @@
         <a href="services.html#staffing">Staffing &amp; Support</a>
       </div>
     </li>
-    <li><a href="#products">Products</a></li>
+    <li><a href="#products">SaaS Products</a></li>
     <li><a href="case-studies.html">Case Studies</a></li>
     <li><a href="careers.html">Careers</a></li>
     <li><a href="contact.html">Contact</a></li>
@@ -159,7 +159,7 @@
 
 
 <!-- ============ 01 · HERO (original three slides) ============ -->
-<section class="hero" id="hero" aria-label="Introduction">
+<section class="hero" id="hero" aria-label="Introduction" role="region" aria-roledescription="carousel">
   <div class="hero-media" id="heroMedia" aria-hidden="true">
     <figure class="hero-shot is-active" style="--fx:79%;--fy:28%"><img src="assets/img/hero/hero-slide-1.jpg" alt=""></figure>
     <figure class="hero-shot" style="--fx:78%;--fy:34%"><img src="assets/img/hero/hero-slide-2.jpg" alt="" loading="lazy"></figure>
@@ -167,22 +167,13 @@
   </div>
   <div class="hero-shade" aria-hidden="true"></div>
 
-  <div class="hero-hud" id="heroHud" aria-hidden="true">
-    <div class="hud-reticle" id="hudReticle">
-      <svg viewBox="-100 -100 200 200"><circle r="88" class="r1"/><circle r="64" class="r2"/><g class="ticks"></g><path d="M-100 0h22M78 0h22M0 -100v22M0 78v22" class="cross"/></svg>
-      <span class="hud-tag mono" id="hudTag">FOCUS 01 — AI SOLUTIONS</span>
-    </div>
-    <span class="hud-corner tl"></span><span class="hud-corner tr"></span><span class="hud-corner bl"></span><span class="hud-corner br"></span>
-    <span class="hud-scan"></span>
-  </div>
-
   <div class="container hero-inner">
     <div class="hero-copy" id="heroCopy">
       <p class="hero-kicker"><span class="hero-kicker-dot"></span>Google Cloud Advanced Consulting Partner</p>
 
       <div class="hero-msgs">
         <div class="hero-msg is-active" id="heroMsg0" role="tabpanel" aria-labelledby="heroTab0">
-          <h1 class="hero-title" data-split>Scalable <em>AI Solutions</em> Built For Faster Innovation</h1>
+          <h1 class="hero-title">Scalable <em>AI Solutions</em> Built For Faster Innovation</h1>
           <p class="hero-text">Empower your enterprise with certified cloud architecture, automated AI/ML pipelines, and intelligent data systems engineered for rapid scale.</p>
           <div class="hero-ctas">
             <a href="services.html#data" class="btn btn-gold btn-magnetic" aria-label="Learn more about Scalable AI Solutions">Learn more <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a>
@@ -190,7 +181,7 @@
           </div>
         </div>
         <div class="hero-msg" id="heroMsg1" role="tabpanel" aria-labelledby="heroTab1" aria-hidden="true">
-          <h2 class="hero-title" data-split>Customer-Centric &amp; <em>Future-Ready</em> Solutions</h2>
+          <h2 class="hero-title">Customer-Centric &amp; <em>Future-Ready</em> Solutions</h2>
           <p class="hero-text">Next-generation immersive interfaces and cloud-native software engineered to grow with your business, ensuring sustained competitive advantage.</p>
           <div class="hero-ctas">
             <a href="services.html#cloud" class="btn btn-gold btn-magnetic" aria-label="Learn more about Future-Ready Solutions" tabindex="-1">Learn more <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a>
@@ -198,7 +189,7 @@
           </div>
         </div>
         <div class="hero-msg" id="heroMsg2" role="tabpanel" aria-labelledby="heroTab2" aria-hidden="true">
-          <h2 class="hero-title" data-split>Empowering People Through <em>Smart Technology</em></h2>
+          <h2 class="hero-title">Empowering People Through <em>Smart Technology</em></h2>
           <p class="hero-text">Transforming organizations with zero-trust cloud security, seamless team collaboration, and automated operational efficiency that empower teams to achieve more.</p>
           <div class="hero-ctas">
             <a href="services.html#security" class="btn btn-gold btn-magnetic" aria-label="Learn more about Smart Technology Solutions" tabindex="-1">Learn more <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a>
@@ -226,8 +217,6 @@
       <path d="M9 18l6-6-6-6"/>
     </svg>
   </button>
-
-  <a href="#capabilities" class="hero-scroll" aria-label="Scroll to content"><span class="mono">Scroll</span><i></i></a>
 </section>
 
 <!-- ============ CAPABILITIES STRIP ============ -->
@@ -254,12 +243,12 @@
   </div>
 </section>
 
-<!-- ============ 02 · SOFTWARE PRODUCTS — auto-sliding interactive cards ============ -->
+<!-- ============ 02 · SAAS PRODUCTS — auto-sliding interactive cards ============ -->
 <section class="products-section" id="products" aria-labelledby="productsTitle">
   <div class="container">
     <div class="products-head reveal">
-      <h2 id="productsTitle" class="products-title">Software Products</h2>
-      <p class="products-sub">Revolutionizing Your Workflow: Innovative Software Products Designed for Seamless Integration and Maximum Efficiency.</p>
+      <h2 id="productsTitle" class="products-title">SaaS Products</h2>
+      <p class="products-sub">Revolutionizing Your Workflow: Innovative SaaS Products Designed for Seamless Integration and Maximum Efficiency.</p>
     </div>
   </div>
 
@@ -432,8 +421,8 @@
     <div class="stats-grid">
       <div class="stat reveal"><span class="stat-k">Est.</span><div class="num">2022</div><div class="lbl">Year founded</div></div>
       <div class="stat reveal"><span class="stat-k">Experience</span><div class="num"><span data-count="100">0</span><i>+</i></div><div class="lbl">Years combined team experience</div></div>
-      <div class="stat reveal"><span class="stat-k">Reach</span><div class="num"><span data-count="100">0</span><i>+</i></div><div class="lbl">Customers worldwide</div></div>
-      <div class="stat reveal"><span class="stat-k">Ecosystem</span><div class="num"><span data-count="30">0</span><i>+</i></div><div class="lbl">Technology partners</div></div>
+      <div class="stat reveal"><span class="stat-k">Reach</span><div class="num"><span data-count="1000">0</span><i>+</i></div><div class="lbl">Customers worldwide</div></div>
+      <div class="stat reveal"><span class="stat-k">Ecosystem</span><div class="num"><span data-count="50">0</span><i>+</i></div><div class="lbl">Technology partners</div></div>
     </div>
   </div>
 </section>
@@ -505,7 +494,7 @@
         <li class="reveal"><span class="mono">01</span><div><h3>Deep bench, real experience</h3><p>Founded in 2022, our team brings over 100 years of combined industry experience across cloud, security and engineering.</p></div></li>
         <li class="reveal"><span class="mono">02</span><div><h3>Top-quality IT solutions</h3><p>Enterprise-grade delivery across cloud, data, security and applications — tailored to your industry.</p></div></li>
         <li class="reveal"><span class="mono">03</span><div><h3>Dedicated sales &amp; support</h3><p>A relationship-first team that stays engaged long after go-live.</p></div></li>
-        <li class="reveal"><span class="mono">04</span><div><h3>Global reach, local touch</h3><p>Serving 100+ customers worldwide as a Google Cloud Advanced Consulting Partner.</p></div></li>
+        <li class="reveal"><span class="mono">04</span><div><h3>Global reach, local touch</h3><p>Serving 1000+ customers worldwide as a Google Cloud Advanced Consulting Partner.</p></div></li>
       </ol>
     </div>
   </div>
