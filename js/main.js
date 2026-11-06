@@ -185,3 +185,16 @@ document.addEventListener('DOMContentLoaded', function () {
   /* ---------- Current year ---------- */
   document.querySelectorAll('.year').forEach(function (el) { el.textContent = new Date().getFullYear(); });
 });
+
+/* ---------- [DIWALI-2026] Temporary festive layer — loads festive/diwali/diwali.config.js ----------
+   The config switches itself off after 11 Nov 2026 (IST). To uninstall, delete this block and festive/diwali/. */
+(function (me) {
+  if (!me || !me.src) return;
+  var url = me.src.replace(/js\/main\.js(\?.*)?$/, 'festive/diwali/diwali.config.js');
+  if (url === me.src) return;
+  var s = document.createElement('script');
+  s.src = url;
+  s.async = true;
+  document.head.appendChild(s);
+})(document.currentScript);
+/* ---------- [/DIWALI-2026] ---------- */
