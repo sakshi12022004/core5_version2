@@ -1,0 +1,19 @@
+services:
+  - type: web
+    name: core5-website
+    runtime: node
+    plan: free
+    buildCommand: npm install
+    startCommand: node server.js
+    autoDeploy: true
+    envVars:
+      - key: SMTP_USER
+        sync: false   # set in the Render dashboard (your sending Gmail address)
+      - key: SMTP_PASS
+        sync: false   # set in the Render dashboard (your 16-char app password)
+      - key: CONTACT_TO
+        sync: false   # set in the Render dashboard (enquiry@core5.co.in)
+      - key: SMTP_PORT
+        value: "465"
+      - key: SMTP_SECURE
+        value: "true"

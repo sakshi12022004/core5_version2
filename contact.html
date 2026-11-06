@@ -10,6 +10,25 @@
 <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/style.css">
 <script>document.documentElement.classList.add('js')</script>
+<style>
+/* ===== Contact form feedback ===== */
+.contact-error { display: none; font-size: 13.5px; color: #c0392b; margin: 2px 0 12px; }
+.contact-error.show { display: block; }
+.contact-success {
+  text-align: center; padding: 40px 28px;
+  background: #fff; border: 1px solid var(--c-line); border-radius: 16px;
+  box-shadow: 0 30px 60px -30px rgba(7,20,51,0.4); animation: ct-fade .35s ease;
+}
+@keyframes ct-fade { from { opacity: 0; transform: translateY(10px); } }
+.contact-check { width: 84px; height: 84px; margin: 0 auto 20px; border-radius: 50%; background: #e8f7ee; display: flex; align-items: center; justify-content: center; }
+.contact-check svg { width: 44px; height: 44px; }
+.contact-check .ring { stroke: #1ea860; stroke-width: 2.5; fill: none; stroke-dasharray: 150; stroke-dashoffset: 150; animation: ct-draw .55s cubic-bezier(.65,0,.45,1) forwards; }
+.contact-check .tick { stroke: #1ea860; stroke-width: 3.5; stroke-linecap: round; stroke-linejoin: round; fill: none; stroke-dasharray: 36; stroke-dashoffset: 36; animation: ct-draw .5s .15s cubic-bezier(.65,0,.45,1) forwards; }
+@keyframes ct-draw { to { stroke-dashoffset: 0; } }
+.contact-success h3 { color: var(--c-navy); margin: 0 0 8px; font-size: 22px; }
+.contact-success p { color: var(--c-slate); font-size: 15px; margin: 0; }
+.contact-form button[type=submit][disabled] { opacity: .7; cursor: default; }
+</style>
 </head>
 <body>
 
@@ -22,8 +41,7 @@
 
     <nav aria-label="Primary">
     <ul class="nav-desktop">
-      <li><a href="index.html">Home</a></li>
-      <li><a href="about.html">About</a></li>
+      <li><a href="about.html">About Us</a></li>
       <li class="has-dropdown">
         <a href="services.html">Services <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></a>
         <div class="dropdown">
@@ -32,27 +50,27 @@
             <div class="mega-col">
               <div class="mega-heading">SaaS Products</div>
               <div class="mega-list">
-                <a href="medisys.html" class="mega-item">
+                <a href="https://core5medisys.io" target="_blank" rel="noopener" class="mega-item">
                   <span class="mega-title">Medisys</span>
                   <span class="mega-desc">Healthcare ERP &amp; clinical EHR suite</span>
                 </a>
-                <a href="core5-academy.html" class="mega-item">
+                <a href="https://core5.io" target="_blank" rel="noopener" class="mega-item">
                   <span class="mega-title">Core5 Academy</span>
                   <span class="mega-desc">Cloud LMS &amp; digital learning platform</span>
                 </a>
-                <a href="mycloudnexus.html" class="mega-item">
+                <a href="https://mycloudnexus.io" target="_blank" rel="noopener" class="mega-item">
                   <span class="mega-title">MyCloudNexus</span>
                   <span class="mega-desc">Multi-cloud FinOps &amp; cost intelligence</span>
                 </a>
-                <a href="elevate.html" class="mega-item">
+                <a href="https://core5elevate.com" target="_blank" rel="noopener" class="mega-item">
                   <span class="mega-title">Elevate</span>
                   <span class="mega-desc">Next-gen HRMS, payroll &amp; talent suite</span>
                 </a>
-                <a href="myorg.html" class="mega-item">
+                <a href="https://orgplus.in" target="_blank" rel="noopener" class="mega-item">
                   <span class="mega-title">MyOrg</span>
                   <span class="mega-desc">Enterprise workspace &amp; team collaboration</span>
                 </a>
-                <a href="bharat-ai.html" class="mega-item">
+                <a href="https://ekbharat.ai" target="_blank" rel="noopener" class="mega-item">
                   <span class="mega-title">Bharat.ai</span>
                   <span class="mega-desc">GPU sales/rental, agentic workflows &amp; AI agents</span>
                 </a>
@@ -106,7 +124,8 @@
       </li>
       <li><a href="case-studies.html">Case Studies</a></li>
       <li><a href="careers.html">Careers</a></li>
-      <li><a href="contact.html" aria-current="page">Contact</a></li>
+      <li><a href="https://ekbharat.ai" target="_blank" rel="noopener">ekBharat.ai</a></li>
+      <li><a href="contact.html" aria-current="page">Contact Us</a></li>
     </ul>
     </nav>
 
@@ -124,8 +143,7 @@
 <div class="mobile-nav" id="mobileNav" aria-label="Menu">
   <button class="mobile-close" aria-label="Close menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg></button>
   <ul>
-    <li><a href="index.html">Home</a></li>
-    <li><a href="about.html">About</a></li>
+    <li><a href="about.html">About Us</a></li>
     <li class="has-sub">
       <a href="services.html" aria-expanded="false">Services <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></a>
       <div class="sub">
@@ -140,7 +158,8 @@
     </li>
     <li><a href="case-studies.html">Case Studies</a></li>
     <li><a href="careers.html">Careers</a></li>
-    <li><a href="contact.html" aria-current="page">Contact</a></li>
+    <li><a href="https://ekbharat.ai" target="_blank" rel="noopener">ekBharat.ai</a></li>
+      <li><a href="contact.html" aria-current="page">Contact Us</a></li>
   </ul>
   <div class="mobile-nav-foot">
     <a href="contact.html" class="btn btn-gold">Get a quote <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a>
@@ -180,34 +199,28 @@
         <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 8v4l3 3M12 2a10 10 0 100 20 10 10 0 000-20z"/></svg></div>
         <div><strong>Business hours</strong><span>Mon – Sat, 9:30 AM – 6:30 PM IST</span></div>
       </div>
-      <div class="footer-social" style="margin-top:28px;">
-        <a href="#" aria-label="Facebook"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg></a>
-        <a href="#" aria-label="X / Twitter"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4l16 16M20 4L4 20"/></svg></a>
-        <a href="#" aria-label="LinkedIn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/><path d="M10 9v12M10 13a4 4 0 018 0v8"/></svg></a>
-        <a href="#" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1"/></svg></a>
-      </div>
     </div>
 
     <div class="reveal">
-      <form class="form-card contact-form">
+      <form class="form-card contact-form" id="contactForm" action="/send" method="POST">
         <div class="form-row">
           <div class="form-group">
             <label for="name">Full name</label>
-            <input type="text" id="name" placeholder="Your name" required>
+            <input type="text" id="name" name="Full Name" autocomplete="name" placeholder="Your name" required>
           </div>
           <div class="form-group">
             <label for="email">Email address</label>
-            <input type="email" id="email" placeholder="you@company.com" required>
+            <input type="email" id="email" name="email" autocomplete="email" placeholder="you@company.com" required>
           </div>
         </div>
         <div class="form-row">
           <div class="form-group">
             <label for="phone">Phone number</label>
-            <input type="tel" id="phone" placeholder="+91 ">
+            <input type="tel" id="phone" name="Phone" autocomplete="tel" placeholder="+91 ">
           </div>
           <div class="form-group">
             <label for="service">Service of interest</label>
-            <select id="service">
+            <select id="service" name="Service of Interest">
               <option>Cloud Strategy &amp; Migration</option>
               <option>DevOps &amp; Engineering</option>
               <option>Data, Analytics &amp; AI</option>
@@ -221,11 +234,25 @@
         <div class="form-row">
           <div class="form-group full">
             <label for="message">Tell us about your project</label>
-            <textarea id="message" placeholder="Share a few details about what you're looking to achieve..." required></textarea>
+            <textarea id="message" name="Message" placeholder="Share a few details about what you're looking to achieve..." required></textarea>
           </div>
         </div>
+
+        <!-- Mail handler control fields -->
+        <input type="hidden" name="form_type" value="contact">
+        <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off" aria-hidden="true">
+
+        <p class="contact-error" id="contactError"></p>
         <button type="submit" class="btn btn-primary btn-magnetic" style="width:100%;justify-content:center;">Send message</button>
       </form>
+
+      <div class="contact-success" id="contactSuccess" role="status" hidden>
+        <div class="contact-check">
+          <svg viewBox="0 0 52 52"><circle class="ring" cx="26" cy="26" r="24"/><path class="tick" d="M15 27l7 7 15-16"/></svg>
+        </div>
+        <h3>Message sent successfully</h3>
+        <p>Thanks for reaching out. Our team has received your enquiry and will get back to you within one business day.</p>
+      </div>
     </div>
   </div>
 </section>
@@ -329,7 +356,7 @@
       <!-- 4. Singapore Office -->
       <article class="office-card reveal">
         <div class="office-map">
-          <iframe src="https://maps.google.com/maps?q=6001+Beach+Road,+#12-04,+Golden+Mile+Tower,+Singapore+199589&t=&z=15&ie=UTF8&iwloc=&output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Core5 Singapore Office Location"></iframe>
+          <iframe src="https://maps.google.com/maps?q=6001+Beach+Road,+%2312-04,+Golden+Mile+Tower,+Singapore+199589&t=&z=15&ie=UTF8&iwloc=&output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Core5 Singapore Office Location"></iframe>
         </div>
         <div class="office-body">
           <span class="office-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="13" height="13"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="3"/></svg>International Office · APAC</span>
@@ -347,7 +374,7 @@
             <a href="mailto:info@core5.co.in">info@core5.co.in</a>
           </div>
           <div class="office-foot">
-            <a href="https://maps.google.com/?q=6001+Beach+Road,+#12-04,+Golden+Mile+Tower,+Singapore+199589" target="_blank" rel="noopener" class="office-directions-link">
+            <a href="https://maps.google.com/?q=6001+Beach+Road,+%2312-04,+Golden+Mile+Tower,+Singapore+199589" target="_blank" rel="noopener" class="office-directions-link">
               <span>Open in Google Maps</span>
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="15" height="15"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
             </a>
@@ -425,5 +452,48 @@
 
 <script src="js/main.js"></script>
 <script>document.querySelector('.back-top').addEventListener('click', function(){ window.scrollTo({top:0, behavior:'smooth'}); });</script>
+<script>
+(function () {
+  var form = document.getElementById('contactForm');
+  if (!form) return;
+  var errorEl = document.getElementById('contactError');
+  var successEl = document.getElementById('contactSuccess');
+  var btn = form.querySelector('button[type="submit"]');
+  var btnLabel = btn.innerHTML;
+
+  function showError() {
+    btn.disabled = false;
+    btn.innerHTML = btnLabel;
+    errorEl.innerHTML = 'Sorry, we could not send your message right now. Please try again, or email us directly at <a href="mailto:enquiry@core5.co.in" style="color:var(--c-gold-dark);font-weight:600;">enquiry@core5.co.in</a>.';
+    errorEl.classList.add('show');
+  }
+
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    errorEl.classList.remove('show');
+    if (!form.checkValidity()) { form.reportValidity(); return; }
+
+    btn.disabled = true;
+    btn.innerHTML = 'Sending…';
+
+    fetch(form.action, {
+      method: 'POST',
+      body: new URLSearchParams(new FormData(form)),
+      headers: { 'Accept': 'application/json' }
+    })
+      .then(function (r) {
+        return r.json().catch(function () { return {}; }).then(function (d) { return { ok: r.ok, data: d }; });
+      })
+      .then(function (res) {
+        var ok = res.ok && res.data.success !== false && res.data.success !== 'false';
+        if (!ok) throw new Error('send-failed');
+        form.hidden = true;
+        successEl.hidden = false;
+        successEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      })
+      .catch(showError);
+  });
+})();
+</script>
 </body>
 </html>
