@@ -2,3 +2,7 @@ node_modules/
 .DS_Store
 Thumbs.db
 *.log
+
+# Mail secrets — never commit the live SMTP app password
+mail-config.php
+mail-config.json

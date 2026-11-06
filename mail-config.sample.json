@@ -1,0 +1,11 @@
+{
+  "_comment": "Copy this file to mail-config.json and fill in smtp_user + smtp_pass. Do NOT commit mail-config.json.",
+  "smtp_host": "smtp.gmail.com",
+  "smtp_port": 465,
+  "smtp_secure": true,
+  "smtp_user": "your-account@core5.co.in",
+  "smtp_pass": "your-16-char-google-app-password",
+  "from_name": "Core5 Website",
+  "contact_to": "enquiry@core5.co.in",
+  "port": 3000
+}

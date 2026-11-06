@@ -72,6 +72,9 @@
   margin: 0;
 }
 
+/* Hero shows the logo instead of the product-name text */
+.product-hero-title { display: none; }
+
 .product-hero-tagline {
   color: var(--c-gold-light);
   font-family: var(--font-main);
@@ -79,6 +82,24 @@
   font-weight: 500;
   margin-top: 10px;
   line-height: 24px;
+}
+
+.product-hero-logo {
+  display: inline-flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+.product-hero-logo img {
+  height: 150px;
+  width: auto;
+  max-width: 600px;
+  object-fit: contain;
+  object-position: left center;
+  display: block;
+  filter: brightness(0) invert(1); /* render the logo white on the dark hero */
+}
+@media (max-width: 600px) {
+  .product-hero-logo img { height: 96px; max-width: 82vw; }
 }
 
 .product-breadcrumb-badge {
